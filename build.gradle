@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.3'
+    id 'io.spring.dependency-management' version '1.1.3'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17' // Java 버전에 맞춰 필요시 수정
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot 핵심
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // 데이터베이스 및 JPA (DB 연동)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // 보안 (인증/인가, JWT 처리)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // 입력 값 유효성 검증
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Java 8 Date/Time 지원 (권장): LocalDateTime, LocalDate 사용 시 필요
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    // 개발 편의성 (Lombok)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // 실제 사용 DB: MySQL Connector J (H2 대신 MySQL로 교체)
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // 테스트 환경
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // 스프링 테스트 환경
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Gradle이 테스트를 실행하는 방법을 설정
+test {
+    useJUnitPlatform()
+}
