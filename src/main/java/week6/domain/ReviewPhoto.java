@@ -1,10 +1,10 @@
 // src/main/java/week4/domain/ReviewPhoto.java
-package week5.domain;
+package week6.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import week4.domain.Review;
+import week6.domain.Review;
 
 @Entity
 @Getter

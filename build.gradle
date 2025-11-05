@@ -35,6 +35,20 @@ dependencies {
     // 실제 사용 DB: MySQL Connector J (H2 대신 MySQL로 교체)
     runtimeOnly 'com.mysql:mysql-connector-j'
 
+    // =========================================================
+    // ✨ QueryDSL 설정 (OpenFeign 팀 Fork - 7.0)
+    // =========================================================
+    implementation "io.github.openfeign.querydsl:querydsl-jpa:7.0"
+    implementation "io.github.openfeign.querydsl:querydsl-core:7.0"
+
+    // APT (Annotation Processor Tool) 설정: Q클래스 생성을 위해 필요
+    annotationProcessor "io.github.openfeign.querydsl:querydsl-apt:7.0:jpa"
+    // JPA 3.x (Jakarta Persistence) 스펙을 위한 의존성 추가
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+
+    // =========================================================
+
     // 테스트 환경
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // 스프링 테스트 환경
     testImplementation platform('org.junit:junit-bom:5.10.0')
@@ -47,3 +61,26 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+// =========================================================
+// ✨ QueryDSL Q클래스 생성 설정
+// =========================================================
+
+// Q클래스가 생성될 디렉토리 경로 지정 (프로젝트 빌드 폴더의 generated/querydsl)
+def querydslDir = layout.buildDirectory.dir("generated/querydsl").get().asFile
+
+// 소스 세트에 생성 경로 추가: Q클래스가 컴파일러에게 인식되도록 함
+sourceSets {
+    main.java.srcDirs += [ querydslDir ]
+}
+
+// 컴파일 시 Q클래스가 위에서 지정한 디렉토리에 생성되도록 설정
+tasks.withType(JavaCompile).configureEach {
+    options.generatedSourceOutputDirectory.set(querydslDir)
+}
+
+// clean 태스크 실행 시 generated/querydsl 폴더도 삭제하도록 설정 (선택 사항)
+clean.doLast {
+    file(querydslDir).deleteDir()
+}
+// =========================================================

@@ -1,4 +1,4 @@
-package week5;
+package week7;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

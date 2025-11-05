@@ -1,4 +1,4 @@
-package week5;
+package week6;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -6,18 +6,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import week5.domain.Location;
-import week5.domain.LocationRepository;
-import week5.domain.Mission;
-import week5.domain.MissionRepository;
-import week5.domain.Review;
-import week5.domain.ReviewRepository;
-import week5.domain.Store;
-import week5.domain.StoreRepository;
-import week5.domain.User;
-import week5.domain.UserRepository;
-import week5.domain.UserMission;
-import week5.domain.UserMissionRepository;
+import week6.domain.Location;
+import week6.domain.LocationRepository;
+import week6.domain.Mission;
+import week6.domain.MissionRepository;
+import week6.domain.Review;
+import week6.domain.ReviewRepository;
+import week6.domain.Store;
+import week6.domain.StoreRepository;
+import week6.domain.User;
+import week6.domain.UserRepository;
+import week6.domain.UserMission;
+import week6.domain.UserMissionRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
