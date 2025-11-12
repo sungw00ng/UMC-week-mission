@@ -41,7 +41,8 @@ public class User {
     @Column(name = "birth", nullable = false)
     private LocalDate birth;
 
-    @Column(name = "address", columnDefinition = "enum('지역구')")
+    // ✅ 수정: columnDefinition 제거 및 length 명시
+    @Column(name = "address", length = 255)
     private String address;
 
     @Column(name = "social_uid", nullable = false, length = 255)
@@ -74,8 +75,8 @@ public class User {
     private List<UserFood> userFoods = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserTerm> userTerms = new ArrayList<>();
+    private List<UserMission> userMissions = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserMission> userMissions = new ArrayList<>();
+    private List<UserTerm> userTerms = new ArrayList<>();
 }

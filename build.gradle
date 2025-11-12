@@ -47,7 +47,12 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 
+    // ✨ SpringDoc OpenAPI (Swagger 3.0) 의존성 추가
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0' // Spring Boot 3.x 버전
     // =========================================================
+
+    // build.gradle 파일의 dependencies 블록에 추가
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     // 테스트 환경
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // 스프링 테스트 환경

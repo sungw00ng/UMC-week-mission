@@ -52,6 +52,8 @@ public class Review {
     private Store store;
 
     // --- 연관 관계: 1:N (Review : ReviewPhoto) ---
+    // 💡 수정: @Builder.Default 추가로 빌더 호출 시 생략 가능
+    @Builder.Default
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewPhoto> reviewPhotos = new ArrayList<>();
 
