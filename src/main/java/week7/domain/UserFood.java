@@ -1,17 +1,17 @@
-// src/main/java/week4/domain/UserFood.java
 package week7.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import week7.domain.Food;
-import week7.domain.User;
+import lombok.*;
+import week7.domain.Enums.Gender; // User.java에 필요한 import라고 가정
+import week7.domain.Enums.SocialType; // User.java에 필요한 import라고 가정
 
 @Entity
 @Getter
-@NoArgsConstructor
+@Builder // 👈 추가
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED) // 👈 추가
 @Table(name = "user_food")
-public class UserFood {
+public class UserFood { // 👈 BaseEntity 상속 제거
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
