@@ -1,6 +1,6 @@
 package week7.web.dto;
 
-import week6.domain.Enums.Gender;
+import week7.domain.Enums.Gender;
 import java.time.LocalDate;
 import lombok.Getter;
 

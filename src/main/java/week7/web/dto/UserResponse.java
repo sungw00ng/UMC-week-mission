@@ -1,4 +1,3 @@
-// 파일: week7.web.dto.UserResponse.java
 package week7.web.dto;
 
 import lombok.AllArgsConstructor;
@@ -27,5 +26,19 @@ public class UserResponse {
         private Long userId;
         private Long missionId;
         private LocalDateTime createdAt;
+    }
+
+    // 🚩 추가: 미션 완료 결과 DTO
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionCompleteResultDTO {
+        private Long userMissionId;
+        private Long userId;
+        private Long missionId;
+        private Integer missionPoint; // 획득한 포인트
+        private Integer userTotalPoint; // 업데이트된 사용자 총 포인트
+        private LocalDateTime completedAt;
     }
 }

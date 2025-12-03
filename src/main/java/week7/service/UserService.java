@@ -12,4 +12,7 @@ public interface UserService {
 
     // 2. 미션 수락 (userId와 missionId를 받아 UserMission을 생성)
     UserMission acceptMission(Long userId, Long missionId);
+
+    // 🚩 추가: 3. 미션 완료 (UserMission ID를 받아 처리)
+    UserMission completeMission(Long userMissionId);
 }

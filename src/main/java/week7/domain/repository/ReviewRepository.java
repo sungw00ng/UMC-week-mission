@@ -10,7 +10,7 @@ import week7.domain.Review;
 import java.util.List;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<week5.domain.Review, Long> {
+public interface ReviewRepository extends JpaRepository<week7.domain.Review, Long> {
 
     // 미션 1: 특정 가게의 리뷰 목록 조회 (메서드 이름 기반 쿼리)
     List<Review> findByStoreId(Long storeId);

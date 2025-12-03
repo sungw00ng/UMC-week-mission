@@ -1,9 +1,9 @@
 package week7.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel; // AccessLevel 임포트
-import lombok.AllArgsConstructor; // AllArgsConstructor 임포트
-import lombok.Builder; // Builder 임포트
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import week7.domain.Enums.Gender;
@@ -20,9 +20,9 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder // ⭐ 추가: builder() 메서드 생성을 위함
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // ⭐ 수정: protected 기본 생성자
-@AllArgsConstructor // ⭐ 추가: Builder 패턴과 함께 사용 권장
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Table(name = "user")
 public class User {
 
@@ -66,7 +66,6 @@ public class User {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    // --- 연관 관계: 1(User) : N(리스트) ---
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
@@ -74,8 +73,13 @@ public class User {
     private List<UserFood> userFoods = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserTerm> userTerms = new ArrayList<>();
+    private List<UserMission> userMissions = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserMission> userMissions = new ArrayList<>();
+    private List<UserTerm> userTerms = new ArrayList<>();
+
+    // 🚩 추가: 포인트 증가 로직
+    public void addPoint(Integer missionPoint) {
+        this.point += missionPoint;
+    }
 }

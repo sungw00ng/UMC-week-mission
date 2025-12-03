@@ -9,29 +9,25 @@ import week7.converter.UserConverter;
 import week7.service.UserService;
 import week7.web.dto.UserRequest;
 import week7.web.dto.UserResponse;
+import week7.global.apiPayload.code.CommonSuccessCode;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users") // 기본 URI
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
     // 1. 회원가입 API
-    // POST /users/signup
     @PostMapping("/signup")
     public ApiResponse<UserResponse.SignUpResultDTO> signUp(@RequestBody UserRequest.SignUpDTO request) {
 
         User user = userService.signUp(request);
 
-        // ApiResponse.onSuccess()는 글로벌 응답 구조 파일(ApiResponse.java)에 구현되어 있어야 합니다.
-        // 여기서는 예시로 성공 코드를 가정합니다.
-        // 🚨 이 부분에서 UserConverter.toSignUpResultDTO(user)가 빨간 줄 오류가 발생했습니다.
-        return ApiResponse.onSuccess(UserConverter.toSignUpResultDTO(user));
+        return ApiResponse.onSuccess(CommonSuccessCode._CREATED, UserConverter.toSignUpResultDTO(user));
     }
 
     // 2. 미션 수락 API
-    // POST /users/{userId}/missions/{missionId}
     @PostMapping("/{userId}/missions/{missionId}")
     public ApiResponse<UserResponse.MissionAcceptResultDTO> acceptMission(
             @PathVariable Long userId,
@@ -39,7 +35,18 @@ public class UserController {
 
         UserMission userMission = userService.acceptMission(userId, missionId);
 
-        // 🚨 이 부분에서 UserConverter.toMissionAcceptResultDTO(userMission)가 빨간 줄 오류가 발생했습니다.
-        return ApiResponse.onSuccess(UserConverter.toMissionAcceptResultDTO(userMission));
+        return ApiResponse.onSuccess(CommonSuccessCode._OK, UserConverter.toMissionAcceptResultDTO(userMission));
+    }
+
+    // 🚩 추가: 3. 진행 중 미션 완료 API
+    // PATCH /users/missions/{userMissionId}/complete
+    @PatchMapping("/missions/{userMissionId}/complete")
+    public ApiResponse<UserResponse.MissionCompleteResultDTO> completeMission(
+            @PathVariable Long userMissionId) {
+
+        UserMission completedUserMission = userService.completeMission(userMissionId);
+
+        return ApiResponse.onSuccess(CommonSuccessCode._OK,
+                UserConverter.toMissionCompleteResultDTO(completedUserMission));
     }
 }

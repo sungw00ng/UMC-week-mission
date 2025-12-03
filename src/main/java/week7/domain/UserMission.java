@@ -1,9 +1,9 @@
 package week7.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel; // AccessLevel 임포트
-import lombok.AllArgsConstructor; // AllArgsConstructor 임포트
-import lombok.Builder; // Builder 임포트
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import week7.domain.Mission;
@@ -11,9 +11,9 @@ import week7.domain.User;
 
 @Entity
 @Getter
-@Builder // ⭐ 추가: builder() 메서드 생성을 위함
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // ⭐ 수정: protected 기본 생성자
-@AllArgsConstructor // ⭐ 추가: Builder 패턴과 함께 사용 권장
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Table(name = "user_mission")
 public class UserMission {
 
@@ -35,4 +35,9 @@ public class UserMission {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
+
+    // 🚩 추가: 미션을 완료 상태로 변경하는 비즈니스 로직
+    public void markAsComplete() {
+        this.isComplete = true;
+    }
 }
